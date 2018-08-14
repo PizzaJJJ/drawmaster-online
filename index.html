@@ -1,0 +1,233 @@
+<head>
+    <title>Drawmaster Online</title>
+    <style>
+        @font-face {
+            font-family: 'NovaSquare';
+            src: url('fonts/NovaSquare.ttf');
+        }
+        * {
+            font-family: 'NovaSquare';
+			text-decoration: none;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        #mainContainer {
+            display: flex;
+        }
+        input[type='checkbox'] {
+            cursor: pointer;
+        }
+        input[type='number'] {
+            padding: 3px;
+            border: solid 1px #fff;
+            border-radius: 5px;
+            box-shadow: inset 1px 1px 2px 0 #707070;
+            transition: box-shadow 0.3s;
+            width: 5em;
+        }
+        input[type='number']:focus {
+            box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+            outline: none;
+        }
+        #imageControls {
+            max-width: 895px;
+            margin-top: 15px;
+            padding: 15px;
+            border: 5px solid #000000;
+            box-shadow: inset 0px 0px 10px rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: space-around;
+            cursor: default;
+        }
+        #placeholder {
+            display: none;
+            text-align: center;
+        }
+        #caption {
+            padding-top: 100px;
+        }
+        #confirm {
+            border: 2px solid #000000;
+            border-radius: 5px;
+            color: #FFFFFF;
+            background-color: rgb(81, 199, 75);
+            width: 100px;
+            height: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: inset 0px 0px 10px rgba(0,0,0,0.85);
+        }
+        #confirm:hover {
+            background-color: rgb(96, 233, 84);
+        }
+        #about {
+            position: relative;
+            border-radius: 10px;
+            color: #FFFFFF;
+            background-color: rgb(144, 145, 144);
+            width: 20px;
+            height: 20px;
+            margin-left: auto;
+            margin-right: 15px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        #about:hover {
+            background-color: rgb(0, 155, 0);
+        }
+        #cont {
+            display: flex;
+        }
+        #cont1 {
+            flex: 1 1 auto;
+        }
+        #cont2 {
+            display: none;
+            padding-right: 15px;
+            text-align: right;
+            flex: 1 1 auto;
+        }
+        #toolsContainer {
+            flex: 0 0 95px;
+            margin-right: 20px;
+            width: 95px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        #toolsContainer > div {
+            width: 100%;
+            transition: all 0.2s ease;
+            border: 5px solid #000000;
+            cursor: pointer;
+            box-shadow: inset 0px 0px 10px rgba(0,0,0,0.85);
+            height: 50px;
+        }
+        #toolsContainer img {
+            display: block;
+            width: auto;
+            height: 60%;
+            padding-top: 10%;
+            margin-left: auto;
+	        margin-right: auto;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        #toolsContainer > div:hover {
+            background-color: rgb(224, 255, 51);
+        }
+        #toolsContainer > div:hover img {
+            transform: scale(1.2);
+        }
+        #toolsContainer > div.active {
+            background-color: #FFCC33;
+        }
+        #canvasContainer {
+            flex: 0 0 auto;
+            border: 10px solid #000000;
+            padding: 0; 
+            width: 800px;
+            height: 600px;
+        }
+        #canvas {
+            position: relative;
+            cursor: none;
+        }
+    </style>
+    <meta name="description" content="Create your own drawings for such games like cursors.io, cursors.me, kursors.io and others." />
+    <meta name="keywords" content="draw, image, line, lines, cursor, cursors, pointer" />
+    <meta name="robots" content="index, follow" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="mainContainer">
+            <div id="toolsContainer">
+                <div class="tools">
+                    <img src="icons/cursor.png">
+                </div>
+                <div class="tools active">
+                    <img src="icons/pencil.png">
+                </div>
+                <div class="tools">
+                    <img src="icons/line.png">
+                </div>
+                <div class="tools">
+                    <img src="icons/scale.png">
+                </div>
+                <div class="tools">
+                    <img src="icons/del.png">
+                </div>
+                <div id="imageButton">
+                    <img src="icons/image.png">
+                </div>
+                <div id="undoButton">
+                    <img src="icons/undo.png">
+                </div>
+                <div id="redoButton">
+                    <img src="icons/redo.png">
+                </div>
+                <div id="saveButton">
+                    <img src="icons/save.png">
+                </div>
+            </div>
+            <div id="canvasContainer">
+                <div id = "placeholder" style="display: block">
+                    <div id="about">?</div>
+                    <div id="cont">
+                        <div id="cont1">
+                            <h1 id="caption">Welcome to Drawmaster Online!</h1>
+                            <h1>Just drag and drop your image<br>or text file with lines<br>to this tab</h1>
+                            <br>
+                            <div id="confirm">
+                                <p>Got it!</p>
+                            </div>
+                        </div>
+                        <div id="cont2">
+                            <p>Create your own drawings<br>
+                                for such games like:<br>
+                                <a href="http://cursors.io/" target="_blank" style="text-decoration: none">cursors.io</a><br>
+                                <a href="http://cursors.me/" target="_blank" style="text-decoration: none">cursors.me</a><br>
+                                <a href="http://kursors.io/" target="_blank" style="text-decoration: none">kursors.io</a><br>
+                                and others</p>
+                            <p>Made by JJJ from<br>
+                                <a href="http://cursors.me/" target="_blank" style="text-decoration: none">cursors.me</a> team<br>
+                                our <a href="https://reddit.com/r/cursorsme" target="_blank" style="text-decoration: none">Reddit</a><br>
+                                our <a href="https://discord.me/cursors" target="_blank" style="text-decoration: none">Discord</a>
+                            </p>
+                            <p>Original idea by Cubemath</p>
+                            <p>Icons by:<br>
+                                <a href="https://icons8.com/" target="_blank" style="text-decoration: none">Icon pack by Icons8</a></p>
+                        </div>
+                    </div>
+                </div>
+                <canvas id="canvas" width="800" height="600" oncontextmenu="return false;" style="display: none;"></canvas>
+            </div>
+    </div>
+    <div id="imageControls">
+        <div>
+            <div><input id="bgFitInput" type="checkbox" checked="true"> Fit image to screen size</div>
+            <div><input id="bgRatioInput" type="checkbox" checked="true"> Save image aspect ratio</div>
+        </div>
+        <div>
+            <div>Image opacity: <input type='number' class='inputNumberUI' id='bgOpacityInput' value=0.5 step=0.1></div>
+            <div style="display: none">Image scale: <input type='number' class='inputNumberUI' id='bgScaleInput' value=1 step=0.05></div>
+        </div>
+        <div>   
+            <div>Image shift X: <input type='number' class='inputNumberUI' id='bgShiftXInput' value=0 step=1></div>
+            <div>Image shift Y: <input type='number' class='inputNumberUI' id='bgShiftYInput' value=0 step=1></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="engine.js"></script>
+</body>
